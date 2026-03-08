@@ -14,6 +14,10 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Accept Android SDK licenses
+      run: |
+        yes | sdkmanager --licenses || true
+        yes | sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
