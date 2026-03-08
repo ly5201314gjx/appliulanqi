@@ -53,7 +53,8 @@ jobs:
     - name: Build debug APK
       run: |
         flutter build apk --debug \
-          --target-platform android-arm64
+          --target-platform android-arm64 \
+          --stacktrace
     
     - name: Verify APK exists
       run: ls -la build/app/outputs/flutter-apk/
