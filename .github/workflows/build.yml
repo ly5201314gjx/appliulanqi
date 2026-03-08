@@ -14,10 +14,12 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Accept Android SDK licenses
-      run: |
-        yes | sdkmanager --licenses || true
-        yes | sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        api-level: 34
+        build-tools: 34.0.0
+        accept-licenses: true
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
@@ -26,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
     - name: Build release APK
-      run: flutter build apk --release
+      run: flutter build apk --release --verbose
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
